@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Format Penilaian Dewan Juri - Lomba Hadroh</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
-        .header { text-align: center; margin-bottom: 30px; }
-        .header h1 { font-size: 24px; margin: 5px 0; }
-        .header h2 { font-size: 20px; margin: 5px 0; }
-        .header h3 { font-size: 18px; margin: 5px 0; font-weight: normal; }
-        .info { margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .section-title { margin-top: 30px; font-weight: bold; font-size: 18px; }
-        .total { font-weight: bold; font-size: 18px; text-align: right; margin-top: 20px; }
-        input.nilai { width: 60px; text-align: center; padding: 5px; }
-        input.jumlah { width: 80px; text-align: center; padding: 5px; font-weight: bold; }
-        input.total { width: 120px; text-align: center; padding: 8px; font-size: 18px; font-weight: bold; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Format Penilaian Dewan Juri - Lomba Hadroh</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+.header { text-align: center; margin-bottom: 30px; }
+.header h1 { font-size: 24px; margin: 5px 0; }
+.header h2 { font-size: 20px; margin: 5px 0; }
+.header h3 { font-size: 18px; margin: 5px 0; font-weight: normal; }
+.info { margin-bottom: 20px; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+.section-title { margin-top: 30px; font-weight: bold; font-size: 18px; }
+.total { font-weight: bold; font-size: 18px; text-align: right; margin-top: 20px; }
+input.nilai { width: 60px; text-align: center; padding: 5px; }
+input.jumlah { width: 80px; text-align: center; padding: 5px; font-weight: bold; }
+input.total { width: 120px; text-align: center; padding: 8px; font-size: 18px; font-weight: bold; }
+.download-btn { display: block; margin: 20px auto; padding: 10px 20px; font-size: 16px; font-weight: bold; background: #1e88e5; color: white; border: none; border-radius: 6px; cursor: pointer; }
+.download-btn:hover { background: #1565c0; }
+</style>
 </head>
 <body>
+<div id="penilaianContainer">
     <div class="header">
         <h1>FORMAT PENILAIAN DEWAN JURI</h1>
         <h2>LOMBA HADROH</h2>
@@ -29,11 +32,10 @@
     </div>
 
     <div class="info">
-        <p><strong>NOMOR PESERTA :</strong> <input type="text" size="30"></p>
-        <p><strong>NAMA GROUP :</strong> <input type="text" size="30"></p>
+        <p><strong>NOMOR PESERTA :</strong> <input type="text" id="nomorPeserta" size="30"></p>
+        <p><strong>NAMA GROUP :</strong> <input type="text" id="namaGroup" size="30"></p>
     </div>
 
-    <!-- Fungsi tabel -->
     <div class="section-title">BIDANG SYAIR (VOCAL DAN HADROH)</div>
     <table class="penilaian">
         <thead>
@@ -93,33 +95,50 @@
         TOTAL NILAI : <input type="number" class="total" readonly>
     </div>
 
-    <script>
-        // Ambil semua tabel penilaian
-        const tables = document.querySelectorAll('.penilaian');
-        const totalInput = document.querySelector('.total');
+    <button class="download-btn" id="downloadBtn">Print / Download PDF</button>
+</div>
 
-        tables.forEach(table => {
-            const rows = table.querySelectorAll('tbody tr');
-            rows.forEach(row => {
-                const nilaiInput = row.querySelector('.nilai');
-                const jumlahInput = row.querySelector('.jumlah');
-                if(nilaiInput && jumlahInput){
-                    nilaiInput.addEventListener('input', () => {
-                        const value = parseFloat(nilaiInput.value) || 0;
-                        jumlahInput.value = value; // langsung tampilkan nilai
-                        updateTotal();
-                    });
-                }
-            });
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+    // Hitung otomatis
+    const tables = document.querySelectorAll('.penilaian');
+    const totalInput = document.querySelector('.total');
+
+    tables.forEach(table => {
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            const nilaiInput = row.querySelector('.nilai');
+            const jumlahInput = row.querySelector('.jumlah');
+            if(nilaiInput && jumlahInput){
+                nilaiInput.addEventListener('input', () => {
+                    const value = parseFloat(nilaiInput.value) || 0;
+                    jumlahInput.value = value;
+                    updateTotal();
+                });
+            }
         });
+    });
 
-        function updateTotal(){
-            let total = 0;
-            document.querySelectorAll('.jumlah').forEach(input => {
-                total += parseFloat(input.value) || 0;
-            });
-            totalInput.value = total;
-        }
-    </script>
+    function updateTotal(){
+        let total = 0;
+        document.querySelectorAll('.jumlah').forEach(input => {
+            total += parseFloat(input.value) || 0;
+        });
+        totalInput.value = total;
+    }
+
+    // Fitur Print / Download PDF
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+        const element = document.getElementById('penilaianContainer');
+        const opt = {
+            margin: 0.5,
+            filename: `Penilaian_${document.getElementById('namaGroup').value.replace(/\s+/g,'_') || 'Group'}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+    });
+</script>
 </body>
 </html>
