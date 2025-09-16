@@ -3,143 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Format Penilaian Lomba Adzan — SMA Negeri 1 Cluring 2025</title>
+<title>Rekap Penilaian Peserta - Lomba Hadroh</title>
 <style>
-* { box-sizing: border-box; }
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
-    margin: 0; padding: 20px; color: #333;
-}
-.container {
-    max-width: 900px; margin: 0 auto;
-    background: white; padding: 30px; border-radius: 15px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-}
-.header { text-align: center; padding: 20px 0; margin-bottom: 30px; border-bottom: 3px solid #1e88e5; }
-.header h1 { font-size: 28px; margin: 5px 0; color: #1565c0; text-transform: uppercase; letter-spacing: 1px; }
-.header h2 { font-size: 22px; margin: 5px 0; color: #d32f2f; font-weight: 600; }
-.header p { font-size: 18px; color: #555; font-weight: 500; margin: 10px 0 0; }
-.info { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
-.info div { flex: 1; min-width: 250px; }
-.info label { display: block; font-weight: bold; margin-bottom: 5px; color: #1976d2; }
-.info input { width: 100%; padding: 10px; border: 2px solid #bbdefb; border-radius: 8px; font-size: 16px; transition: border-color 0.3s; }
-.info input:focus { outline: none; border-color: #1976d2; }
-table { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; }
-th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #e0e0e0; }
-thead { background: linear-gradient(135deg, #1e88e5, #1565c0); color: white; }
-tbody tr:nth-child(even) { background-color: #f9f9f9; }
-tbody tr:hover { background-color: #e3f2fd; }
-input.nilai { width: 70px; padding: 8px; border: 2px solid #bbdefb; border-radius: 6px; text-align: center; font-weight: bold; }
-input.jumlah { width: 90px; padding: 8px; background-color: #e3f2fd; border: 2px solid #90caf9; border-radius: 6px; text-align: center; font-weight: bold; color: #0d47a1; }
-.total-section { text-align: right; margin: 30px 0; padding: 20px; background: #e3f2fd; border-radius: 10px; border-left: 5px solid #1976d2; }
-.total-section strong { font-size: 20px; color: #0d47a1; }
-.catatan-section { margin: 30px 0; }
-.catatan-section label { display: block; font-weight: bold; margin-bottom: 10px; color: #333; }
-.catatan-section textarea { width: 100%; padding: 15px; border: 2px solid #bbdefb; border-radius: 10px; font-size: 15px; min-height: 80px; resize: vertical; }
-.ttd-section { text-align: right; margin-top: 40px; }
-.ttd-section label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
-.ttd-section input { width: 300px; padding: 10px; border: none; border-bottom: 2px solid #1976d2; font-size: 16px; text-align: center; font-weight: 500; }
-.download-btn {
-    display: block; margin: 30px auto; padding: 12px 30px; font-size: 16px; font-weight: bold;
-    background: #1e88e5; color: white; border: none; border-radius: 8px; cursor: pointer;
-    transition: all 0.3s ease;
-}
-.download-btn:hover { background: #1565c0; }
-@media print { body { background: white; padding: 0; } .container { box-shadow: none; padding: 20px; } }
+body { font-family: Arial, sans-serif; margin: 20px; }
+h1 { text-align: center; margin-bottom: 20px; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+th, td { border: 1px solid #000; padding: 5px; text-align: center; }
+th { background-color: #f2f2f2; cursor: pointer; }
+input.nilai, input.nama { width: 60px; text-align: center; }
+input.nama { width: 120px; text-align: left; }
+button { margin: 5px; padding: 5px 10px; cursor: pointer; }
+#filterInput { width: 200px; padding: 5px; margin-bottom: 10px; }
 </style>
 </head>
 <body>
-<div class="container" id="penilaianContainer">
-    <div class="header">
-        <h1>FORMAT PENILAIAN DEWAN JURI</h1>
-        <h2>LOMBA ADZAN</h2>
-        <p>SMA Negeri 1 Cluring 2025</p>
-    </div>
 
-    <div class="info">
-        <div><label>NOMOR PESERTA</label><input type="text" id="nomorPeserta" placeholder="Masukkan nomor peserta"></div>
-        <div><label>NAMA PESERTA</label><input type="text" id="namaPeserta" placeholder="Masukkan nama peserta"></div>
-    </div>
+<h1>Rekap Penilaian Peserta - Lomba Hadroh</h1>
 
-    <h3 style="font-weight: bold; color: #1565c0; margin: 25px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #bbdefb;">ASPEK PENILAIAN</h3>
-    <table class="penilaian">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Unsur yang Dinilai</th>
-                <th>Bobot Nilai</th>
-                <th>Nilai</th>
-                <th>Jumlah</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>1</td><td>Tajwid dan Makharijul Huruf</td><td>20</td><td><input type="number" class="nilai" min="0" max="100" placeholder="0-100"></td><td><input type="number" class="jumlah" readonly></td></tr>
-            <tr><td>2</td><td>Kelancaran Bacaan</td><td>15</td><td><input type="number" class="nilai" min="0" max="100" placeholder="0-100"></td><td><input type="number" class="jumlah" readonly></td></tr>
-            <tr><td>3</td><td>Lagu / Irama Adzan</td><td>20</td><td><input type="number" class="nilai" min="0" max="100" placeholder="0-100"></td><td><input type="number" class="jumlah" readonly></td></tr>
-            <tr><td>4</td><td>Kesesuaian Nada</td><td>15</td><td><input type="number" class="nilai" min="0" max="100" placeholder="0-100"></td><td><input type="number" class="jumlah" readonly></td></tr>
-            <tr><td>5</td><td>Kekuatan Suara</td><td>10</td><td><input type="number" class="nilai" min="0" max="100" placeholder="0-100"></td><td><input type="number" class="jumlah" readonly></td></tr>
-            <tr><td>6</td><td>Sikap dan Adab</td><td>10</td><td><input type="number" class="nilai" min="0" max="100" placeholder="0-100"></td><td><input type="number" class="jumlah" readonly></td></tr>
-            <tr><td>7</td><td>Waktu dan Ketepatan</td><td>10</td><td><input type="number" class="nilai" min="0" max="100" placeholder="0-100"></td><td><input type="number" class="jumlah" readonly></td></tr>
-            <tr style="font-weight:bold; background-color:#bbdefb;"><td colspan="2">JUMLAH</td><td>100</td><td><input type="number" class="nilai" readonly></td><td><input type="number" class="jumlah" readonly></td></tr>
-        </tbody>
-    </table>
+<p>Filter Nama / Group: <input type="text" id="filterInput" placeholder="Ketik nama atau grup..."></p>
 
-    <div class="total-section">
-        TOTAL NILAI: <input type="number" class="total" readonly placeholder="Akan terisi otomatis">
-    </div>
+<table id="pesertaTable">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama Peserta / Group</th>
+            <th>Kekompakan</th>
+            <th>Variasi Lagu</th>
+            <th>Harmonisasi Nada</th>
+            <th>Kesesuaian Tempo</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Baris peserta dibuat otomatis JS -->
+    </tbody>
+</table>
 
-    <div class="catatan-section">
-        <label>CATATAN JURI</label>
-        <textarea id="catatan" placeholder="Tuliskan catatan atau masukan untuk peserta..."></textarea>
-    </div>
-
-    <div class="ttd-section">
-        <label>Tanda Tangan Juri</label>
-        <input type="text" id="ttd" placeholder="(Nama Juri)">
-    </div>
-
-    <button class="download-btn" id="downloadBtn">Download Hasil Penilaian PDF</button>
-</div>
+<button id="saveAllBtn">Simpan Semua Nilai</button>
+<button id="downloadAllBtn">Download Semua PDF</button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-// Hitung otomatis
-const table = document.querySelector('.penilaian');
-const totalInput = document.querySelector('.total');
-const nilaiRows = table.querySelectorAll('tbody tr');
-
-nilaiRows.forEach(row => {
-    const nilaiInput = row.querySelector('.nilai');
-    const jumlahInput = row.querySelector('.jumlah');
-    if(nilaiInput && jumlahInput){
-        nilaiInput.addEventListener('input', () => {
-            const value = parseFloat(nilaiInput.value) || 0;
-            jumlahInput.value = value;
-            updateTotal();
-        });
-    }
-});
-
-function updateTotal(){
-    let total = 0;
-    document.querySelectorAll('.jumlah').forEach(input => {
-        total += parseFloat(input.value) || 0;
-    });
-    totalInput.value = total;
+// Buat 50 peserta
+const tbody = document.querySelector('#pesertaTable tbody');
+for(let i=1;i<=50;i++){
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td>${i}</td>
+        <td><input type="text" class="nama" placeholder="Nama peserta ${i}"></td>
+        <td><input type="number" class="nilai" min="0" max="100"></td>
+        <td><input type="number" class="nilai" min="0" max="100"></td>
+        <td><input type="number" class="nilai" min="0" max="100"></td>
+        <td><input type="number" class="nilai" min="0" max="100"></td>
+        <td><input type="number" class="total" readonly></td>
+    `;
+    tbody.appendChild(tr);
 }
 
-// Download PDF
-document.getElementById('downloadBtn').addEventListener('click', () => {
-    const element = document.getElementById('penilaianContainer');
-    const opt = {
-        margin:       0.5,
-        filename:     `Penilaian_${document.getElementById('namaPeserta').value.replace(/\s+/g,'_') || 'Peserta'}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-    };
-    html2pdf().set(opt).from(element).save();
+// Load dari localStorage
+for(let i=1;i<=50;i++){
+    const data = JSON.parse(localStorage.getItem('peserta_'+i));
+    if(data){
+        const row = tbody.children[i-1];
+        row.querySelector('.nama').value = data.nama;
+        const nilaiInputs = row.querySelectorAll('.nilai');
+        nilaiInputs.forEach((input,index)=> input.value = data.nilai[index]);
+        row.querySelector('.total').value = data.total;
+    }
+}
+
+// Hitung total per baris
+function updateTotal(row){
+    let total = 0;
+    row.querySelectorAll('.nilai').forEach(input => total += parseFloat(input.value)||0);
+    row.querySelector('.total').value = total;
+}
+
+// Event listener input nilai
+document.querySelectorAll('input.nilai').forEach(input=>{
+    input.addEventListener('input', ()=>{
+        const row = input.closest('tr');
+        updateTotal(row);
+        saveRow(row);
+    });
+});
+
+// Simpan satu baris
+function saveRow(row){
+    const index = Array.from(tbody.children).indexOf(row)+1;
+    const nama = row.querySelector('.nama').value;
+    const nilaiArr = Array.from(row.querySelectorAll('.nilai')).map(i=>parseFloat(i.value)||0);
+    const total = row.querySelector('.total').value;
+    localStorage.setItem('peserta_'+index, JSON.stringify({nama, nilai: nilaiArr, total}));
+}
+
+// Tombol simpan semua
+document.getElementById('saveAllBtn').addEventListener('click', ()=>{
+    tbody.querySelectorAll('tr').forEach(saveRow);
+    alert('Semua nilai tersimpan di browser!');
+});
+
+// Tombol download semua PDF
+document.getElementById('downloadAllBtn').addEventListener('click', async ()=>{
+    for(let i=0;i<tbody.children.length;i++){
+        const row = tbody.children[i];
+        const element = document.createElement('div');
+        element.style.padding='10px';
+        element.innerHTML = `
+            <h2>Penilaian Peserta</h2>
+            <p><strong>No Peserta:</strong> ${i+1}</p>
+            <p><strong>Nama:</strong> ${row.querySelector('.nama').value}</p>
+            <table border="1" style="border-collapse:collapse; width:100%;">
+                <tr><th>Aspek</th><th>Nilai</th></tr>
+                <tr><td>Kekompakan</td><td>${row.children[2].querySelector('input').value}</td></tr>
+                <tr><td>Variasi Lagu</td><td>${row.children[3].querySelector('input').value}</td></tr>
+                <tr><td>Harmonisasi Nada</td><td>${row.children[4].querySelector('input').value}</td></tr>
+                <tr><td>Kesesuaian Tempo</td><td>${row.children[5].querySelector('input').value}</td></tr>
+                <tr><td>Total</td><td>${row.children[6].querySelector('input').value}</td></tr>
+            </table>
+        `;
+        await html2pdf().set({margin:0.5, filename:`Penilaian_Peserta_${i+1}.pdf`, jsPDF:{unit:'in',format:'a4',orientation:'portrait'}}).from(element).save();
+    }
+    alert('Semua PDF telah di-download!');
+});
+
+// Filter peserta
+document.getElementById('filterInput').addEventListener('input', function(){
+    const val = this.value.toLowerCase();
+    tbody.querySelectorAll('tr').forEach(row=>{
+        const nama = row.querySelector('.nama').value.toLowerCase();
+        row.style.display = nama.includes(val)?'':'none';
+    });
+});
+
+// Sort kolom Total (klik header)
+document.querySelectorAll('th').forEach((th,index)=>{
+    if(index===6){ // kolom Total
+        th.addEventListener('click', ()=>{
+            let rows = Array.from(tbody.querySelectorAll('tr'));
+            rows.sort((a,b)=> parseFloat(b.querySelector('.total').value) - parseFloat(a.querySelector('.total').value));
+            rows.forEach(r=>tbody.appendChild(r));
+        });
+    }
 });
 </script>
 </body>
