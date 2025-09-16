@@ -25,23 +25,54 @@
             line-height: 1.6;
         }
         .container { max-width:1200px; margin:0 auto; padding:20px; }
+        .header-wrapper {
+            position: relative;
+            margin: 30px 0;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 25px rgba(255, 157, 0, 0.6);
+            transition: all 0.3s ease;
+            z-index: 10;
+            background: white;
+            padding: 5px;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 157, 0, 0.9);
+        }
+        .school-name {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #ff9d00;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
         header {
             text-align:center;
-            padding:60px 20px 40px;
+            padding: 40px 20px;
             background: rgba(0,0,0,0.3);
             border-radius:20px;
-            margin:30px 0;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             animation: fadeInDown 1.2s ease-out;
+            position: relative;
         }
-        header img {
-            width:100px;
-            height:auto;
-            display:block;
-            margin:0 auto 20px;
+        @keyframes fadeInDown { 
+            from { opacity:0; transform: translateY(-30px);} 
+            to { opacity:1; transform: translateY(0);} 
         }
-        @keyframes fadeInDown { from { opacity:0; transform: translateY(-30px);} to { opacity:1; transform: translateY(0);} }
         h1 {
             font-size:3.2rem;
             margin-bottom:10px;
@@ -51,6 +82,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-top: 10px;
+        }
+        .mosque-icon {
+            font-size: 2.8rem;
+            margin-right: 15px;
+            vertical-align: middle;
+            color: #ff9d00;
+            text-shadow: 0 0 10px rgba(255, 157, 0, 0.5);
         }
         .subtitle { font-size:1.3rem; font-weight:300; margin-bottom:25px; opacity:0.9; }
         .tagline { font-size:1.1rem; font-style:italic; margin-top:15px; color: var(--text-muted); }
@@ -99,17 +138,39 @@
         @keyframes pulse { 0%{ box-shadow:0 0 0 0 rgba(255,157,0,0.7);} 70%{ box-shadow:0 0 0 15px rgba(255,157,0,0);} 100%{ box-shadow:0 0 0 0 rgba(255,157,0,0);} }
         .floating { animation: floating 3s ease-in-out infinite; }
         @keyframes floating { 0%{ transform:translateY(0);} 50%{ transform:translateY(-15px);} 100%{ transform:translateY(0);} }
-        @media (max-width:768px){ h1{ font-size:2.4rem; } .btn{ padding:14px 28px; font-size:1rem; min-width:180px; } .btn-group{ gap:15px; } .section-title{ font-size:1.8rem; } }
+        @media (max-width:768px){ 
+            h1{ font-size:2.4rem; } 
+            .btn{ padding:14px 28px; font-size:1rem; min-width:180px; } 
+            .btn-group{ gap:15px; } 
+            .section-title{ font-size:1.8rem; } 
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+            .school-name {
+                font-size: 1.3rem;
+            }
+            .mosque-icon {
+                font-size: 2.2rem;
+                margin-right: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <img src="https://i.ibb.co/xKfZBy7w/SMAN1-Cluring-emblem.png" alt="Logo SMAN 1 Cluring">
-            <h1><i class="fas fa-mosque"></i> Lomba Adzan & Hadroh</h1>
-            <p class="subtitle">Dalam Rangka Peringatan Maulid Nabi Muhammad SAW</p>
-            <p class="tagline">SMA Negeri 1 Cluring • Tahun 2025</p>
-        </header>
+        <div class="header-wrapper">
+            <div class="logo-container">
+                <img src="https://i.ibb.co.com/xKfZBy7w/SMAN1-Cluring-emblem.png" alt="Logo SMAN 1 Cluring" class="logo">
+            </div>
+            <div class="school-name">SMAN 1 CLURING</div>
+            
+            <header>
+                <h1><i class="fas fa-mosque mosque-icon"></i> Lomba Adzan & Hadroh</h1>
+                <p class="subtitle">Dalam Rangka Peringatan Maulid Nabi Muhammad SAW</p>
+                <p class="tagline">SMA Negeri 1 Cluring • Tahun 2025</p>
+            </header>
+        </div>
 
         <div class="btn-group">
             <a href="Penilaian-Adzan.html" class="btn btn-primary pulse" target="_blank">
@@ -126,7 +187,7 @@
                 <div class="info-card">
                     <i class="fas fa-calendar-alt"></i>
                     <h3>Waktu & Tempat</h3>
-                    <p>Lomba akan dilaksanakan pada 17 dan 18 September 2025 di SMA Negeri 1 Cluring.</p>
+                    <p>Lomba akan dilaksanakan pada 17 Dan 18 September 2025 di SMA Negeri 1 Cluring.</p>
                 </div>
                 <div class="info-card">
                     <i class="fas fa-users"></i>
