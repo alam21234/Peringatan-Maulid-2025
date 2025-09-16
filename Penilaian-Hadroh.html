@@ -266,78 +266,6 @@
                 padding: 4px;
             }
         }
-
-        /* ============================================================
-        PERBAIKAN UTAMA: CETAK PDF AGAR SEMPURNA DALAM UKURAN A4
-        ============================================================
-        */
-        @media print {
-            body {
-                background: none;
-                font-size: 12pt;
-                color: #000;
-                margin: 0;
-                padding: 0;
-                /* Ukuran A4 */
-                width: 210mm;
-                height: 297mm;
-            }
-
-            .container {
-                width: 100%;
-                max-width: none;
-                margin: 0;
-                padding: 15mm; /* Memberi margin di sekeliling */
-                box-shadow: none;
-                border-radius: 0;
-            }
-
-            .actions, .reset-btn {
-                display: none; /* Sembunyikan tombol aksi */
-            }
-
-            /* Hilangkan box-shadow untuk tabel saat cetak */
-            table {
-                box-shadow: none;
-                border-collapse: collapse;
-            }
-            
-            th, td {
-                border-color: #000; /* Perjelas border saat cetak */
-                padding: 6mm 4mm;
-            }
-
-            input {
-                -webkit-print-color-adjust: exact;
-                color-adjust: exact;
-                border: none !important;
-                background: none !important;
-                font-weight: bold;
-                padding: 0;
-                text-align: left;
-            }
-
-            /* Atur ulang style input agar terlihat seperti teks biasa */
-            input.nilai, input.jumlah, input.total, .info input, .juri-info input {
-                border: none !important;
-                background: none !important;
-                font-weight: bold;
-                text-align: center; /* Sesuaikan sesuai kebutuhan */
-            }
-
-            /* Sembunyikan border pada input teks */
-            .info input, .juri-info input {
-                border-bottom: 1px solid #000 !important;
-                text-align: left;
-            }
-            
-            .total-section {
-                background-color: #e8f4ff !important;
-                -webkit-print-color-adjust: exact;
-                color-adjust: exact;
-                border: 1px solid #000;
-            }
-        }
     </style>
 </head>
 <body>
@@ -348,7 +276,7 @@
                 <h2>LOMBA HADROH</h2>
                 <h3>SMA Negeri 1 Cluring 2025</h3>
             </div>
-    
+
             <div class="info">
                 <p>
                     <label for="nomorPeserta">NOMOR PESERTA:</label>
@@ -359,7 +287,7 @@
                     <input type="text" id="namaGroup">
                 </p>
             </div>
-    
+
             <div class="section-title">BIDANG SYAIR (VOCAL DAN HADROH)</div>
             <table class="penilaian">
                 <thead>
@@ -403,7 +331,7 @@
                     </tr>
                 </tbody>
             </table>
-    
+
             <div class="section-title">BIDANG MUSIKALISASI</div>
             <table class="penilaian">
                 <thead>
@@ -441,7 +369,7 @@
                     </tr>
                 </tbody>
             </table>
-    
+
             <div class="section-title">BIDANG PENAMPILAN (KESELURUHAN)</div>
             <table class="penilaian">
                 <thead>
@@ -479,26 +407,28 @@
                     </tr>
                 </tbody>
             </table>
-    
+
             <div class="total-section">
                 TOTAL NILAI: <input type="number" class="total" id="totalNilai" readonly>
             </div>
-    
+
             <div class="juri-info">
                 <p>
                     <label for="namaJuri">NAMA JURI:</label>
                     <input type="text" id="namaJuri">
                 </p>
             </div>
-    
-            <div class="actions">
-                <button class="download-btn" id="downloadBtn">Download / Print PDF</button>
-                <button class="reset-btn" id="resetBtn">Reset Form</button>
-            </div>
+        </div>
+
+        <div class="actions">
+            <button class="download-btn" id="downloadBtn">Download / Print PDF</button>
+            <button class="reset-btn" id="resetBtn">Reset Form</button>
         </div>
     </div>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
     <script>
         // Fungsi untuk memvalidasi input nilai dan memperbarui total
         function handleInput(event) {
@@ -514,16 +444,16 @@
             
             updateRowTotal(input);
             updateTotal();
-            saveToLocalStorage(); // Simpan setiap kali ada perubahan
+            saveToLocalStorage();
         }
-    
+
         // Fungsi untuk memperbarui total per baris
         function updateRowTotal(input) {
             const row = input.closest('tr');
             const jumlahInput = row.querySelector('.jumlah');
             jumlahInput.value = input.value || 0;
         }
-    
+
         // Fungsi untuk memperbarui total keseluruhan
         function updateTotal() {
             let total = 0;
@@ -532,7 +462,7 @@
             });
             document.getElementById('totalNilai').value = total;
         }
-    
+
         // Fungsi untuk mereset form
         function resetForm() {
             if (confirm('Apakah Anda yakin ingin mereset form? Semua data yang telah dimasukkan akan hilang.')) {
@@ -540,59 +470,169 @@
                     input.value = '';
                 });
                 document.getElementById('totalNilai').value = '';
-                localStorage.removeItem('penilaianHadroh'); // Hapus data dari localStorage
+                localStorage.removeItem('penilaianHadroh');
             }
         }
-    
-        // Fungsi untuk menghasilkan PDF
-        function generatePDF() {
+
+        // Fungsi untuk menghasilkan PDF menggunakan jsPDF dan autotable
+        async function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'mm', 'a4');
+            const margin = 15;
+            let y = margin;
+            const pageHeight = doc.internal.pageSize.height;
+
             const nomorPeserta = document.getElementById('nomorPeserta').value.trim();
             const namaGroup = document.getElementById('namaGroup').value.trim();
             const namaJuri = document.getElementById('namaJuri').value.trim();
-            
+            const totalNilai = document.getElementById('totalNilai').value || '0';
+
             if (!nomorPeserta || !namaGroup || !namaJuri) {
                 alert('Harap isi Nomor Peserta, Nama Group, dan Nama Juri sebelum mengunduh PDF.');
                 return;
             }
-            
-            const element = document.getElementById('penilaianContainer');
-            
-            const opt = {
-                margin: [10, 10, 10, 10], // Margin yang lebih merata untuk A4
-                filename: `Penilaian_Hadroh_${namaGroup.replace(/\s+/g, '_')}_${nomorPeserta}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, logging: false },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-    
-            html2pdf().set(opt).from(element).save();
+
+            // Header
+            doc.setFontSize(18);
+            doc.setTextColor('#1565c0');
+            doc.text('FORMAT PENILAIAN DEWAN JURI', doc.internal.pageSize.width / 2, y, { align: 'center' });
+            y += 8;
+            doc.setFontSize(14);
+            doc.setTextColor('#1e88e5');
+            doc.text('LOMBA HADROH', doc.internal.pageSize.width / 2, y, { align: 'center' });
+            y += 6;
+            doc.setFontSize(12);
+            doc.setTextColor('#666');
+            doc.text('SMA Negeri 1 Cluring 2025', doc.internal.pageSize.width / 2, y, { align: 'center' });
+            y += 10;
+            doc.setLineWidth(0.5);
+            doc.setDrawColor('#1e88e5');
+            doc.line(margin, y, doc.internal.pageSize.width - margin, y);
+            y += 8;
+
+            // Info Peserta
+            doc.setFontSize(12);
+            doc.setTextColor('#333');
+            doc.setFont(undefined, 'bold');
+            doc.text(`NOMOR PESERTA: ${nomorPeserta}`, margin, y);
+            y += 6;
+            doc.text(`NAMA GROUP: ${namaGroup}`, margin, y);
+            y += 10;
+            doc.setFont(undefined, 'normal');
+
+            // Fungsi untuk menambahkan tabel
+            function addTable(title, tableData) {
+                doc.setFontSize(12);
+                doc.setTextColor('#1565c0');
+                doc.setFont(undefined, 'bold');
+                doc.text(title, margin, y);
+                y += 5;
+                doc.setLineWidth(0.2);
+                doc.setDrawColor('#ccc');
+                doc.line(margin, y, doc.internal.pageSize.width - margin, y);
+                y += 3;
+                
+                doc.autoTable({
+                    startY: y,
+                    head: [['NO', 'UNSUR YANG DINILAI', 'NILAI (0-100)', 'JUMLAH']],
+                    body: tableData,
+                    theme: 'grid',
+                    styles: { fontSize: 10, cellPadding: 2, textColor: '#333' },
+                    headStyles: { fillColor: '#1e88e5', textColor: '#fff', fontStyle: 'bold' },
+                    columnStyles: {
+                        0: { cellWidth: 15, halign: 'center' },
+                        1: { cellWidth: 90 },
+                        2: { cellWidth: 30, halign: 'center' },
+                        3: { cellWidth: 30, halign: 'center' },
+                    },
+                    margin: { top: 0, left: margin, right: margin },
+                    didDrawPage: (data) => {
+                        y = data.cursor.y + 5;
+                    }
+                });
+                y = doc.autoTable.previous.finalY + 10;
+            }
+
+            // Ambil data dari tabel HTML
+            const tables = document.querySelectorAll('table.penilaian');
+            const tableBodies = [
+                document.querySelectorAll('.penilaian tbody tr:nth-child(1) td:nth-child(2), .penilaian tbody tr:nth-child(1) input.nilai, .penilaian tbody tr:nth-child(1) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody tr:nth-child(2) td:nth-child(2), .penilaian tbody tr:nth-child(2) input.nilai, .penilaian tbody tr:nth-child(2) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody tr:nth-child(3) td:nth-child(2), .penilaian tbody tr:nth-child(3) input.nilai, .penilaian tbody tr:nth-child(3) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody tr:nth-child(4) td:nth-child(2), .penilaian tbody tr:nth-child(4) input.nilai, .penilaian tbody tr:nth-child(4) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody tr:nth-child(5) td:nth-child(2), .penilaian tbody tr:nth-child(5) input.nilai, .penilaian tbody tr:nth-child(5) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody:nth-of-type(2) tr:nth-child(1) td:nth-child(2), .penilaian tbody:nth-of-type(2) tr:nth-child(1) input.nilai, .penilaian tbody:nth-of-type(2) tr:nth-child(1) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody:nth-of-type(2) tr:nth-child(2) td:nth-child(2), .penilaian tbody:nth-of-type(2) tr:nth-child(2) input.nilai, .penilaian tbody:nth-of-type(2) tr:nth-child(2) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody:nth-of-type(2) tr:nth-child(3) td:nth-child(2), .penilaian tbody:nth-of-type(2) tr:nth-child(3) input.nilai, .penilaian tbody:nth-of-type(2) tr:nth-child(3) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody:nth-of-type(2) tr:nth-child(4) td:nth-child(2), .penilaian tbody:nth-of-type(2) tr:nth-child(4) input.nilai, .penilaian tbody:nth-of-type(2) tr:nth-child(4) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody:nth-of-type(3) tr:nth-child(1) td:nth-child(2), .penilaian tbody:nth-of-type(3) tr:nth-child(1) input.nilai, .penilaian tbody:nth-of-type(3) tr:nth-child(1) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody:nth-of-type(3) tr:nth-child(2) td:nth-child(2), .penilaian tbody:nth-of-type(3) tr:nth-child(2) input.nilai, .penilaian tbody:nth-of-type(3) tr:nth-child(2) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody:nth-of-type(3) tr:nth-child(3) td:nth-child(2), .penilaian tbody:nth-of-type(3) tr:nth-child(3) input.nilai, .penilaian tbody:nth-of-type(3) tr:nth-child(3) input.jumlah'),
+                document.querySelectorAll('.penilaian tbody:nth-of-type(3) tr:nth-child(4) td:nth-child(2), .penilaian tbody:nth-of-type(3) tr:nth-child(4) input.nilai, .penilaian tbody:nth-of-type(3) tr:nth-child(4) input.jumlah'),
+            ];
+
+            const bidangSyairData = [
+                ['1', tableBodies[0][0].textContent, tableBodies[0][1].value, tableBodies[0][2].value],
+                ['2', tableBodies[1][0].textContent, tableBodies[1][1].value, tableBodies[1][2].value],
+                ['3', tableBodies[2][0].textContent, tableBodies[2][1].value, tableBodies[2][2].value],
+                ['4', tableBodies[3][0].textContent, tableBodies[3][1].value, tableBodies[3][2].value],
+                ['5', tableBodies[4][0].textContent, tableBodies[4][1].value, tableBodies[4][2].value],
+            ];
+            addTable('BIDANG SYAIR (VOCAL DAN HADROH)', bidangSyairData);
+
+            const bidangMusikalData = [
+                ['1', tableBodies[5][0].textContent, tableBodies[5][1].value, tableBodies[5][2].value],
+                ['2', tableBodies[6][0].textContent, tableBodies[6][1].value, tableBodies[6][2].value],
+                ['3', tableBodies[7][0].textContent, tableBodies[7][1].value, tableBodies[7][2].value],
+                ['4', tableBodies[8][0].textContent, tableBodies[8][1].value, tableBodies[8][2].value],
+            ];
+            addTable('BIDANG MUSIKALISASI', bidangMusikalData);
+
+            const bidangPenampilanData = [
+                ['1', tableBodies[9][0].textContent, tableBodies[9][1].value, tableBodies[9][2].value],
+                ['2', tableBodies[10][0].textContent, tableBodies[10][1].value, tableBodies[10][2].value],
+                ['3', tableBodies[11][0].textContent, tableBodies[11][1].value, tableBodies[11][2].value],
+                ['4', tableBodies[12][0].textContent, tableBodies[12][1].value, tableBodies[12][2].value],
+            ];
+            addTable('BIDANG PENAMPILAN (KESELURUHAN)', bidangPenampilanData);
+
+            // Total Nilai
+            doc.setFontSize(14);
+            doc.setTextColor('#1e88e5');
+            doc.setFont(undefined, 'bold');
+            doc.text(`TOTAL NILAI: ${totalNilai}`, doc.internal.pageSize.width - margin, y, { align: 'right' });
+            y += 10;
+            doc.setFont(undefined, 'normal');
+
+            // Info Juri
+            y += 10;
+            doc.setFontSize(12);
+            doc.setTextColor('#333');
+            doc.setFont(undefined, 'bold');
+            doc.text(`NAMA JURI: ${namaJuri}`, margin, y);
+
+            // Simpan PDF
+            doc.save(`Penilaian_Hadroh_${namaGroup.replace(/\s+/g, '_')}_${nomorPeserta}.pdf`);
         }
-    
+
         // Fitur autosave menggunakan localStorage
         function saveToLocalStorage() {
             const formData = {
                 nomorPeserta: document.getElementById('nomorPeserta').value,
                 namaGroup: document.getElementById('namaGroup').value,
                 namaJuri: document.getElementById('namaJuri').value,
-                nilai: []
+                nilai: Array.from(document.querySelectorAll('.nilai')).map(input => input.value)
             };
-            
-            document.querySelectorAll('.nilai').forEach(input => {
-                formData.nilai.push(input.value);
-            });
-            
             localStorage.setItem('penilaianHadroh', JSON.stringify(formData));
         }
-    
+
         function loadFromLocalStorage() {
             const savedData = localStorage.getItem('penilaianHadroh');
             if (savedData) {
                 const formData = JSON.parse(savedData);
-                
                 document.getElementById('nomorPeserta').value = formData.nomorPeserta || '';
                 document.getElementById('namaGroup').value = formData.namaGroup || '';
                 document.getElementById('namaJuri').value = formData.namaJuri || '';
-                
                 if (formData.nilai) {
                     document.querySelectorAll('.nilai').forEach((input, index) => {
                         if (formData.nilai[index]) {
@@ -604,20 +644,17 @@
                 }
             }
         }
-    
+
         // Event listener ketika halaman dimuat
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.nilai').forEach(input => {
                 input.addEventListener('input', handleInput);
             });
-            
             document.querySelectorAll('#nomorPeserta, #namaGroup, #namaJuri').forEach(input => {
                 input.addEventListener('input', saveToLocalStorage);
             });
-            
             document.getElementById('resetBtn').addEventListener('click', resetForm);
             document.getElementById('downloadBtn').addEventListener('click', generatePDF);
-            
             loadFromLocalStorage();
         });
     </script>
