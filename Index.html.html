@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lomba Adzan & Hadroh dalam rangka memperingati Maulid Nabi Muhammad SAW 2025 di SMAN 1 Cluring">
+    <title>Lomba Adzan & Hadroh | Maulid Nabi 2025 - SMAN 1 Cluring</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --accent-color: #3b6978;
+            --accent-gradient: linear-gradient(45deg, #ff9d00, #ff6a00);
+            --secondary-gradient: linear-gradient(45deg, #00c3ff, #0077ff);
+            --text-light: #fff;
+            --text-muted: #d1e7ff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            color: var(--text-light);
+            overflow-x: hidden;
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1.2s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            letter-spacing: 1.5px;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef, #dee2e6, #f8f9fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-top: 15px;
+            color: var(--text-muted);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 36px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 220px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--secondary-gradient);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 60px 0 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #ff9d00, transparent);
+            border-radius: 2px;
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            padding: 20px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            background: #000;
+            aspect-ratio: 16/9;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .info-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .info-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ff9d00;
+        }
+
+        .info-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 157, 0, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 157, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 157, 0, 0); }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.4rem; }
+            .btn { padding: 14px 28px; font-size: 1rem; min-width: 180px; }
+            .btn-group { gap: 15px; }
+            .section-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-mosque"></i> Lomba Adzan & Hadroh</h1>
+            <p class="subtitle">Dalam Rangka Peringatan Maulid Nabi Muhammad SAW</p>
+            <p class="tagline">SMA Negeri 1 Cluring • Tahun 2025</p>
+        </header>
+
+        <div class="btn-group">
+            <a href="Penilaian-Adzan.html" class="btn btn-primary pulse" target="_blank">
+                <i class="fas fa-microphone-alt"></i> Form Penilaian Adzan
+            </a>
+            <a href="Penilaian-Hadroh.html" class="btn btn-secondary pulse" target="_blank">
+                <i class="fas fa-drum"></i> Form Penilaian Hadroh
+            </a>
+        </div>
+
+        <section class="info-section">
+            <h2 class="section-title">Tentang Lomba</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Waktu Pelaksanaan</h3>
+                    <p>Lomba akan dilaksanakan pada tanggal 15 November 2025 di Aula SMA Negeri 1 Cluring</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Hadiah Pemenang</h3>
+                    <p>Pemenang akan mendapatkan piala, sertifikat, dan uang pembinaan untuk juara 1, 2, dan 3</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Peserta</h3>
+                    <p>Lomba terbuka untuk semua siswa SMA Negeri 1 Cluring dengan pendaftaran melalui OSIS</p>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title floating"><i class="fas fa-video"></i> Tutorial Lomba Hadroh</h2>
+        <div class="video-container">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/x-u_7hELI-s?si=dWYo-e-Kynu27-AK" 
+                    title="Tutorial Lomba Hadroh"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 OSIS SMA Negeri 1 Cluring • Dalam rangka memperingati Maulid Nabi Muhammad SAW</p>
+            <p>“Barangsiapa yang mencintai sunnahku, maka ia telah mencintaiku. Dan barangsiapa mencintaiku, niscaya ia bersamaku di surga.” — HR. Tirmidzi</p>
+        </footer>
+    </div>
+
+    <script>
+        // Optional: Add smooth hover or scroll effects
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
