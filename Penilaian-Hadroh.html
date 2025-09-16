@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Format Penilaian Dewan Juri - Lomba Hadroh</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 24px; margin: 5px 0; }
+        .header h2 { font-size: 20px; margin: 5px 0; }
+        .header h3 { font-size: 18px; margin: 5px 0; font-weight: normal; }
+        .info { margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .section-title { margin-top: 30px; font-weight: bold; font-size: 18px; }
+        .total { font-weight: bold; font-size: 18px; text-align: right; margin-top: 20px; }
+        input.nilai { width: 60px; text-align: center; padding: 5px; }
+        input.jumlah { width: 80px; text-align: center; padding: 5px; font-weight: bold; }
+        input.total { width: 120px; text-align: center; padding: 8px; font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>FORMAT PENILAIAN DEWAN JURI</h1>
+        <h2>LOMBA HADROH</h2>
+        <h3>SMA Negeri 1 Cluring 2025</h3>
+    </div>
+
+    <div class="info">
+        <p><strong>NOMOR PESERTA :</strong> <input type="text" size="30"></p>
+        <p><strong>NAMA GROUP :</strong> <input type="text" size="30"></p>
+    </div>
+
+    <!-- Fungsi tabel -->
+    <div class="section-title">BIDANG SYAIR (VOCAL DAN HADROH)</div>
+    <table class="penilaian">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>UNSUR YANG DINILAI</th>
+                <th>NILAI</th>
+                <th>JUMLAH</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Kekompakan pembacaan syair</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            <tr><td>2</td><td>Kesesuaian nada hadroh dengan syair</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            <tr><td>3</td><td>Kelancaran pembacaan syair</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            <tr><td>4</td><td>Keindahan suara (vokal)</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            <tr><td>5</td><td>Adab & penampilan</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">BIDANG MUSIKALISASI</div>
+    <table class="penilaian">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>UNSUR YANG DINILAI</th>
+                <th>NILAI</th>
+                <th>JUMLAH</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Kekompakan (kerapian & keserasian)</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            <tr><td>2</td><td>Variasi lagu</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            <tr><td>3</td><td>Harmonisasi nada</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            <tr><td>4</td><td>Kesesuaian tempo dengan syair</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">BIDANG PENAMPILAN (KESELURUHAN)</div>
+    <table class="penilaian">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>UNSUR YANG DINILAI</th>
+                <th>NILAI</th>
+                <th>JUMLAH</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Keutuhan & kekompakan grup</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            <tr><td>2</td><td>Kreativitas & variasi</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            <tr><td>3</td><td>Performance (penguasaan panggung)</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            <tr><td>4</td><td>Kerapian & keserasian busana</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+        </tbody>
+    </table>
+
+    <div class="total">
+        TOTAL NILAI : <input type="number" class="total" readonly>
+    </div>
+
+    <script>
+        // Ambil semua tabel penilaian
+        const tables = document.querySelectorAll('.penilaian');
+        const totalInput = document.querySelector('.total');
+
+        tables.forEach(table => {
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const nilaiInput = row.querySelector('.nilai');
+                const jumlahInput = row.querySelector('.jumlah');
+                if(nilaiInput && jumlahInput){
+                    nilaiInput.addEventListener('input', () => {
+                        const value = parseFloat(nilaiInput.value) || 0;
+                        jumlahInput.value = value; // langsung tampilkan nilai
+                        updateTotal();
+                    });
+                }
+            });
+        });
+
+        function updateTotal(){
+            let total = 0;
+            document.querySelectorAll('.jumlah').forEach(input => {
+                total += parseFloat(input.value) || 0;
+            });
+            totalInput.value = total;
+        }
+    </script>
+</body>
+</html>
