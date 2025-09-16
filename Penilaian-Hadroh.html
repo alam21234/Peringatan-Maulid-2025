@@ -1,611 +1,245 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Penilaian Lomba Hadroh — SMA Negeri 1 Cluring 2025</title>
-    <style>
-        :root {
-            --primary-color: #1e88e5;
-            --primary-dark: #1565c0;
-            --secondary-color: #f5f5f5;
-            --border-color: #ccc;
-            --text-color: #333;
-            --success-color: #4caf50;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Penilaian Lomba Hadroh — SMA Negeri 1 Cluring 2025</title>
+<style>
+:root {
+    --primary-color: #1e88e5;
+    --primary-dark: #1565c0;
+    --secondary-color: #f5f5f5;
+    --border-color: #ccc;
+    --text-color: #333;
+}
+* { box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 10px; line-height: 1.6; font-size: 14px; color: var(--text-color);
+    background-color: #f9f9f9;
+}
+.container {
+    max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.header { text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid var(--primary-color);}
+.header h1 { font-size: 22px; margin: 5px 0; color: var(--primary-dark);}
+.header h2 { font-size: 18px; margin: 5px 0; color: var(--primary-color);}
+.header h3 { font-size: 16px; margin: 5px 0; font-weight: normal; color: #666;}
 
-        * {
-            box-sizing: border-box;
-        }
+.info { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+.info label { font-weight: bold; margin-bottom: 5px; }
+.info input { padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 14px; width: 100%; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 10px;
-            line-height: 1.6;
-            font-size: 14px;
-            color: var(--text-color);
-            background-color: #f9f9f9;
-        }
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);}
+th, td { border: 1px solid var(--border-color); padding: 8px; text-align: left;}
+th { background-color: var(--primary-color); color: white; font-weight: bold; }
+tr:nth-child(even) { background-color: var(--secondary-color); }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+input.nilai { width: 60px; text-align: center; padding: 6px; font-size: 13px; border: 1px solid var(--border-color); border-radius: 4px; }
+input.jumlah { width: 70px; text-align: center; padding: 6px; font-weight: bold; font-size: 13px; background-color: #f0f0f0; border: 1px solid var(--border-color);}
+input.total { width: 120px; text-align: center; padding: 8px; font-weight: bold; font-size: 16px; background-color: var(--primary-color); color: white; border: none; border-radius: 4px;}
 
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--primary-color);
-        }
+.section-title { font-weight: bold; margin: 20px 0 10px; font-size: 16px; color: var(--primary-dark); padding-bottom: 5px; border-bottom: 1px solid var(--border-color); }
 
-        .header h1 {
-            font-size: 22px;
-            margin: 5px 0;
-            color: var(--primary-dark);
-        }
+.actions { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
+.download-btn, .reset-btn { padding: 10px 20px; font-size: 14px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s; }
+.download-btn { background: var(--primary-color); color: white; }
+.download-btn:hover { background: var(--primary-dark);}
+.reset-btn { background: #f44336; color: white; }
+.reset-btn:hover { background: #d32f2f; }
 
-        .header h2 {
-            font-size: 18px;
-            margin: 5px 0;
-            color: var(--primary-color);
-        }
+.total-section { text-align: right; margin: 20px 0; padding: 10px; background-color: #e8f4ff; border-radius: 4px; font-weight: bold; }
 
-        .header h3 {
-            font-size: 16px;
-            margin: 5px 0;
-            font-weight: normal;
-            color: #666;
-        }
+.juri-info { margin-top: 30px; padding-top: 15px; border-top: 1px dashed var(--border-color);}
+.juri-info input { padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; width: 100%; margin-top: 5px; }
 
-        .info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .info p {
-            margin: 5px 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .info label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .info input {
-            padding: 8px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 14px;
-            width: 100%;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            font-size: 13px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            border: 1px solid var(--border-color);
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: var(--primary-color);
-            color: white;
-            font-weight: bold;
-        }
-
-        tr:nth-child(even) {
-            background-color: var(--secondary-color);
-        }
-
-        input.nilai {
-            width: 60px;
-            text-align: center;
-            padding: 6px;
-            font-size: 13px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-        }
-
-        input.jumlah {
-            width: 70px;
-            text-align: center;
-            padding: 6px;
-            font-weight: bold;
-            font-size: 13px;
-            background-color: #f0f0f0;
-            border: 1px solid var(--border-color);
-        }
-
-        input.total {
-            width: 120px;
-            text-align: center;
-            padding: 8px;
-            font-weight: bold;
-            font-size: 16px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-        }
-
-        .section-title {
-            font-weight: bold;
-            margin: 20px 0 10px;
-            font-size: 16px;
-            color: var(--primary-dark);
-            padding-bottom: 5px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .actions {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 25px;
-        }
-
-        .download-btn, .reset-btn {
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: bold;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .download-btn {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .download-btn:hover {
-            background: var(--primary-dark);
-        }
-
-        .reset-btn {
-            background: #f44336;
-            color: white;
-        }
-
-        .reset-btn:hover {
-            background: #d32f2f;
-        }
-
-        .total-section {
-            text-align: right;
-            margin: 20px 0;
-            padding: 10px;
-            background-color: #e8f4ff;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .juri-info {
-            margin-top: 30px;
-            padding-top: 15px;
-            border-top: 1px dashed var(--border-color);
-        }
-
-        .juri-info input {
-            padding: 8px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            width: 100%;
-            margin-top: 5px;
-        }
-
-        /* Responsiveness */
-        @media (max-width: 768px) {
-            .info {
-                grid-template-columns: 1fr;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 6px;
-            }
-            
-            input.nilai {
-                width: 50px;
-            }
-            
-            input.jumlah {
-                width: 60px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .header h1 {
-                font-size: 18px;
-            }
-            
-            .header h2 {
-                font-size: 16px;
-            }
-            
-            .actions {
-                flex-direction: column;
-            }
-            
-            th, td {
-                padding: 4px;
-                font-size: 11px;
-            }
-            
-            input.nilai {
-                width: 40px;
-                padding: 4px;
-            }
-            
-            input.jumlah {
-                width: 50px;
-                padding: 4px;
-            }
-        }
-
-        /* ============================================================
-        PERBAIKAN UTAMA: CETAK PDF AGAR SEMPURNA DALAM UKURAN A4
-        ============================================================
-        */
-        @media print {
-            body {
-                background: none;
-                font-size: 12pt;
-                color: #000;
-                margin: 0;
-                padding: 0;
-                width: 210mm;
-                height: 297mm;
-            }
-
-            .container {
-                width: 100%;
-                max-width: none;
-                margin: 0;
-                padding: 15mm;
-                box-shadow: none;
-                border-radius: 0;
-            }
-
-            .actions, .reset-btn {
-                display: none;
-            }
-
-            table {
-                box-shadow: none;
-                border-collapse: collapse;
-            }
-            
-            th, td {
-                border-color: #000;
-                padding: 6mm 4mm;
-            }
-
-            /* Pastikan background dan warna teks input tercetak */
-            input {
-                -webkit-print-color-adjust: exact;
-                color-adjust: exact;
-            }
-
-            /* Atur ulang style input agar terlihat seperti teks biasa */
-            input.nilai, input.jumlah, input.total, .info input, .juri-info input {
-                border: none !important;
-                background: none !important;
-                font-weight: bold;
-                text-align: center;
-            }
-
-            .info input, .juri-info input {
-                border-bottom: 1px solid #000 !important;
-                text-align: left;
-            }
-            
-            .total-section {
-                background-color: #e8f4ff !important;
-                -webkit-print-color-adjust: exact;
-                color-adjust: exact;
-                border: 1px solid #000;
-            }
-
-            /* Konten akan otomatis dipecah antar halaman jika diperlukan */
-        }
-    </style>
+/* ================== PRINT READY ================== */
+@media print {
+    body { background: none; margin: 0; padding: 0; width: 210mm; height: 297mm; font-size: 12pt; color: #000; }
+    .container { width: 100%; max-width: none; margin: 0; padding: 15mm; box-shadow: none; border-radius: 0;}
+    .actions, .reset-btn { display: none; }
+    table { box-shadow: none; border-collapse: collapse; page-break-inside: auto;}
+    tr { page-break-inside: avoid; page-break-after: auto; }
+    thead { display: table-header-group; }
+    tfoot { display: table-footer-group; }
+    input { -webkit-print-color-adjust: exact; color-adjust: exact; border: none !important; background: none !important; font-weight: bold; text-align: center; }
+    .info input, .juri-info input { border-bottom: 1px solid #000 !important; text-align: left; }
+    .total-section { background-color: #e8f4ff !important; -webkit-print-color-adjust: exact; color-adjust: exact; border: 1px solid #000;}
+}
+/* Responsiveness */
+@media (max-width:768px){.info{grid-template-columns:1fr;} table{font-size:12px;} th,td{padding:6px;} input.nilai{width:50px;} input.jumlah{width:60px;}}
+@media (max-width:480px){.container{padding:10px;} .header h1{font-size:18px;} .header h2{font-size:16px;} .actions{flex-direction:column;} th,td{padding:4px;font-size:11px;} input.nilai{width:40px;padding:4px;} input.jumlah{width:50px;padding:4px;}}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div id="penilaianContainer">
-            <div class="header">
-                <h1>FORMAT PENILAIAN DEWAN JURI</h1>
-                <h2>LOMBA HADROH</h2>
-                <h3>SMA Negeri 1 Cluring 2025</h3>
-            </div>
-    
-            <div class="info">
-                <p>
-                    <label for="nomorPeserta">NOMOR PESERTA:</label>
-                    <input type="text" id="nomorPeserta">
-                </p>
-                <p>
-                    <label for="namaGroup">NAMA GROUP:</label>
-                    <input type="text" id="namaGroup">
-                </p>
-            </div>
-    
-            <div class="section-title">BIDANG SYAIR (VOCAL DAN HADROH)</div>
-            <table class="penilaian">
-                <thead>
-                    <tr>
-                        <th width="5%">NO</th>
-                        <th width="65%">UNSUR YANG DINILAI</th>
-                        <th width="15%">NILAI (0-100)</th>
-                        <th width="15%">JUMLAH</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Kekompakan pembacaan syair</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Kesesuaian nada hadroh dengan syair</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Kelancaran pembacaan syair</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Keindahan suara (vokal)</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Adab & penampilan</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                </tbody>
-            </table>
-    
-            <div class="section-title">BIDANG MUSIKALISASI</div>
-            <table class="penilaian">
-                <thead>
-                    <tr>
-                        <th width="5%">NO</th>
-                        <th width="65%">UNSUR YANG DINILAI</th>
-                        <th width="15%">NILAI (0-100)</th>
-                        <th width="15%">JUMLAH</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Kekompakan (kerapian & keserasian)</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Variasi lagu</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Harmonisasi nada</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Kesesuaian tempo dengan syair</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                </tbody>
-            </table>
-    
-            <div class="section-title">BIDANG PENAMPILAN (KESELURUHAN)</div>
-            <table class="penilaian">
-                <thead>
-                    <tr>
-                        <th width="5%">NO</th>
-                        <th width="65%">UNSUR YANG DINILAI</th>
-                        <th width="15%">NILAI (0-100)</th>
-                        <th width="15%">JUMLAH</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Keutuhan & kekompakan grup</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Kreativitas & variasi</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Performance (penguasaan panggung)</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Kerapian & keserasian busana</td>
-                        <td><input type="number" class="nilai" min="0" max="100"></td>
-                        <td><input type="number" class="jumlah" readonly></td>
-                    </tr>
-                </tbody>
-            </table>
-    
-            <div class="total-section">
-                TOTAL NILAI: <input type="number" class="total" id="totalNilai" readonly>
-            </div>
-    
-            <div class="juri-info">
-                <p>
-                    <label for="namaJuri">NAMA JURI:</label>
-                    <input type="text" id="namaJuri">
-                </p>
-            </div>
+<div class="container">
+    <div id="penilaianContainer">
+        <div class="header">
+            <h1>FORMAT PENILAIAN DEWAN JURI</h1>
+            <h2>LOMBA HADROH</h2>
+            <h3>SMA Negeri 1 Cluring 2025</h3>
         </div>
-    
-        <div class="actions">
-            <button class="download-btn" id="downloadBtn">Download / Print PDF</button>
-            <button class="reset-btn" id="resetBtn">Reset Form</button>
+
+        <div class="info">
+            <p>
+                <label for="nomorPeserta">NOMOR PESERTA:</label>
+                <input type="text" id="nomorPeserta">
+            </p>
+            <p>
+                <label for="namaGroup">NAMA GROUP:</label>
+                <input type="text" id="namaGroup">
+            </p>
+        </div>
+
+        <!-- BIDANG SYAIR -->
+        <div class="section-title">BIDANG SYAIR (VOCAL DAN HADROH)</div>
+        <table class="penilaian">
+            <thead>
+                <tr>
+                    <th width="5%">NO</th>
+                    <th width="65%">UNSUR YANG DINILAI</th>
+                    <th width="15%">NILAI (0-100)</th>
+                    <th width="15%">JUMLAH</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Kekompakan pembacaan syair</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+                <tr><td>2</td><td>Kesesuaian nada hadroh dengan syair</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+                <tr><td>3</td><td>Kelancaran pembacaan syair</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+                <tr><td>4</td><td>Keindahan suara (vokal)</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+                <tr><td>5</td><td>Adab & penampilan</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            </tbody>
+        </table>
+
+        <!-- BIDANG MUSIKALISASI -->
+        <div class="section-title">BIDANG MUSIKALISASI</div>
+        <table class="penilaian">
+            <thead>
+                <tr>
+                    <th width="5%">NO</th>
+                    <th width="65%">UNSUR YANG DINILAI</th>
+                    <th width="15%">NILAI (0-100)</th>
+                    <th width="15%">JUMLAH</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Kekompakan (kerapian & keserasian)</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+                <tr><td>2</td><td>Variasi lagu</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+                <tr><td>3</td><td>Harmonisasi nada</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+                <tr><td>4</td><td>Kesesuaian tempo dengan syair</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            </tbody>
+        </table>
+
+        <!-- BIDANG PENAMPILAN -->
+        <div class="section-title">BIDANG PENAMPILAN (KESELURUHAN)</div>
+        <table class="penilaian">
+            <thead>
+                <tr>
+                    <th width="5%">NO</th>
+                    <th width="65%">UNSUR YANG DINILAI</th>
+                    <th width="15%">NILAI (0-100)</th>
+                    <th width="15%">JUMLAH</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Keutuhan & kekompakan grup</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+                <tr><td>2</td><td>Kreativitas & variasi</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+                <tr><td>3</td><td>Performance (penguasaan panggung)</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+                <tr><td>4</td><td>Kerapian & keserasian busana</td><td><input type="number" class="nilai" min="0" max="100"></td><td><input type="number" class="jumlah" readonly></td></tr>
+            </tbody>
+        </table>
+
+        <div class="total-section">
+            TOTAL NILAI: <input type="number" class="total" id="totalNilai" readonly>
+        </div>
+
+        <div class="juri-info">
+            <p>
+                <label for="namaJuri">NAMA JURI:</label>
+                <input type="text" id="namaJuri">
+            </p>
         </div>
     </div>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script>
-        // Fungsi untuk memvalidasi input nilai dan memperbarui total
-        function handleInput(event) {
-            const input = event.target;
-            let value = parseFloat(input.value);
-            
-            if (isNaN(value) || value < 0) {
-                value = 0;
-            } else if (value > 100) {
-                value = 100;
-            }
-            input.value = value;
-            
-            updateRowTotal(input);
+
+    <div class="actions">
+        <button class="download-btn" id="downloadBtn">Download / Print PDF</button>
+        <button class="reset-btn" id="resetBtn">Reset Form</button>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+function handleInput(e) {
+    let val = parseFloat(e.target.value);
+    if(isNaN(val)||val<0) val=0; else if(val>100) val=100;
+    e.target.value = val;
+    updateRowTotal(e.target); updateTotal(); saveToLocalStorage();
+}
+function updateRowTotal(input) {
+    const row = input.closest('tr');
+    const jumlahInput = row.querySelector('.jumlah');
+    jumlahInput.value = input.value || 0;
+}
+function updateTotal() {
+    let total=0;
+    document.querySelectorAll('.jumlah').forEach(i=>{total+=parseFloat(i.value)||0;});
+    document.getElementById('totalNilai').value = total;
+}
+function resetForm() {
+    if(confirm('Apakah Anda yakin ingin mereset form? Semua data akan hilang.')){
+        document.querySelectorAll('input').forEach(i=>i.value='');
+        document.getElementById('totalNilai').value='';
+        localStorage.removeItem('penilaianHadroh');
+    }
+}
+function generatePDF() {
+    const nomor=document.getElementById('nomorPeserta').value.trim();
+    const group=document.getElementById('namaGroup').value.trim();
+    const juri=document.getElementById('namaJuri').value.trim();
+    if(!nomor||!group||!juri){alert('Isi Nomor Peserta, Nama Group, dan Nama Juri.');return;}
+    const element=document.getElementById('penilaianContainer');
+    const opt={
+        margin:[10,10,10,10],
+        filename:`Penilaian_Hadroh_${group.replace(/\s+/g,'_')}_${nomor}.pdf`,
+        image:{type:'jpeg',quality:0.98},
+        html2canvas:{scale:3,useCORS:true,logging:true},
+        jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+        pagebreak:{mode:['css','legacy']}
+    };
+    html2pdf().set(opt).from(element).save();
+}
+function saveToLocalStorage(){
+    const data={
+        nomorPeserta: document.getElementById('nomorPeserta').value,
+        namaGroup: document.getElementById('namaGroup').value,
+        namaJuri: document.getElementById('namaJuri').value,
+        nilai:Array.from(document.querySelectorAll('.nilai')).map(i=>i.value)
+    };
+    localStorage.setItem('penilaianHadroh',JSON.stringify(data));
+}
+function loadFromLocalStorage(){
+    const saved=localStorage.getItem('penilaianHadroh');
+    if(saved){
+        const data=JSON.parse(saved);
+        document.getElementById('nomorPeserta').value=data.nomorPeserta||'';
+        document.getElementById('namaGroup').value=data.namaGroup||'';
+        document.getElementById('namaJuri').value=data.namaJuri||'';
+        if(data.nilai){
+            document.querySelectorAll('.nilai').forEach((i,idx)=>{
+                if(data.nilai[idx]){i.value=data.nilai[idx];updateRowTotal(i);}
+            });
             updateTotal();
-            saveToLocalStorage();
         }
-
-        // Fungsi untuk memperbarui total per baris
-        function updateRowTotal(input) {
-            const row = input.closest('tr');
-            const jumlahInput = row.querySelector('.jumlah');
-            jumlahInput.value = input.value || 0;
-        }
-
-        // Fungsi untuk memperbarui total keseluruhan
-        function updateTotal() {
-            let total = 0;
-            document.querySelectorAll('.jumlah').forEach(input => {
-                total += parseFloat(input.value) || 0;
-            });
-            document.getElementById('totalNilai').value = total;
-        }
-
-        // Fungsi untuk mereset form
-        function resetForm() {
-            if (confirm('Apakah Anda yakin ingin mereset form? Semua data yang telah dimasukkan akan hilang.')) {
-                document.querySelectorAll('input').forEach(input => {
-                    input.value = '';
-                });
-                document.getElementById('totalNilai').value = '';
-                localStorage.removeItem('penilaianHadroh');
-            }
-        }
-
-        // Fungsi untuk menghasilkan PDF
-        function generatePDF() {
-            const nomorPeserta = document.getElementById('nomorPeserta').value.trim();
-            const namaGroup = document.getElementById('namaGroup').value.trim();
-            const namaJuri = document.getElementById('namaJuri').value.trim();
-            
-            if (!nomorPeserta || !namaGroup || !namaJuri) {
-                alert('Harap isi Nomor Peserta, Nama Group, dan Nama Juri sebelum mengunduh PDF.');
-                return;
-            }
-            
-            const element = document.getElementById('penilaianContainer');
-            
-            const opt = {
-                margin: [10, 10, 10, 10],
-                filename: `Penilaian_Hadroh_${namaGroup.replace(/\s+/g, '_')}_${nomorPeserta}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, logging: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            
-            // Perbaikan: gunakan html2pdf() untuk menghasilkan PDF
-            html2pdf().set(opt).from(element).save();
-        }
-
-        // Fitur autosave menggunakan localStorage
-        function saveToLocalStorage() {
-            const formData = {
-                nomorPeserta: document.getElementById('nomorPeserta').value,
-                namaGroup: document.getElementById('namaGroup').value,
-                namaJuri: document.getElementById('namaJuri').value,
-                nilai: Array.from(document.querySelectorAll('.nilai')).map(input => input.value)
-            };
-            localStorage.setItem('penilaianHadroh', JSON.stringify(formData));
-        }
-
-        function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('penilaianHadroh');
-            if (savedData) {
-                const formData = JSON.parse(savedData);
-                document.getElementById('nomorPeserta').value = formData.nomorPeserta || '';
-                document.getElementById('namaGroup').value = formData.namaGroup || '';
-                document.getElementById('namaJuri').value = formData.namaJuri || '';
-                if (formData.nilai) {
-                    document.querySelectorAll('.nilai').forEach((input, index) => {
-                        if (formData.nilai[index]) {
-                            input.value = formData.nilai[index];
-                            updateRowTotal(input);
-                        }
-                    });
-                    updateTotal();
-                }
-            }
-        }
-
-        // Event listener ketika halaman dimuat
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.nilai').forEach(input => {
-                input.addEventListener('input', handleInput);
-            });
-            document.querySelectorAll('#nomorPeserta, #namaGroup, #namaJuri').forEach(input => {
-                input.addEventListener('input', saveToLocalStorage);
-            });
-            document.getElementById('resetBtn').addEventListener('click', resetForm);
-            document.getElementById('downloadBtn').addEventListener('click', generatePDF);
-            loadFromLocalStorage();
-        });
-    </script>
+    }
+}
+document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('.nilai').forEach(i=>i.addEventListener('input',handleInput));
+    document.querySelectorAll('#nomorPeserta,#namaGroup,#namaJuri').forEach(i=>i.addEventListener('input',saveToLocalStorage));
+    document.getElementById('resetBtn').addEventListener('click',resetForm);
+    document.getElementById('downloadBtn').addEventListener('click',generatePDF);
+    loadFromLocalStorage();
+});
+</script>
 </body>
 </html>
