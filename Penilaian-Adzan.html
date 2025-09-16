@@ -40,11 +40,17 @@ input.jumlah { width: 90px; padding: 8px; background-color: #e3f2fd; border: 2px
 .ttd-section { text-align: right; margin-top: 40px; }
 .ttd-section label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
 .ttd-section input { width: 300px; padding: 10px; border: none; border-bottom: 2px solid #1976d2; font-size: 16px; text-align: center; font-weight: 500; }
+.download-btn {
+    display: block; margin: 30px auto; padding: 12px 30px; font-size: 16px; font-weight: bold;
+    background: #1e88e5; color: white; border: none; border-radius: 8px; cursor: pointer;
+    transition: all 0.3s ease;
+}
+.download-btn:hover { background: #1565c0; }
 @media print { body { background: white; padding: 0; } .container { box-shadow: none; padding: 20px; } }
 </style>
 </head>
 <body>
-<div class="container">
+<div class="container" id="penilaianContainer">
     <div class="header">
         <h1>FORMAT PENILAIAN DEWAN JURI</h1>
         <h2>LOMBA ADZAN</h2>
@@ -52,8 +58,8 @@ input.jumlah { width: 90px; padding: 8px; background-color: #e3f2fd; border: 2px
     </div>
 
     <div class="info">
-        <div><label>NOMOR PESERTA</label><input type="text" placeholder="Masukkan nomor peserta"></div>
-        <div><label>NAMA PESERTA</label><input type="text" placeholder="Masukkan nama peserta"></div>
+        <div><label>NOMOR PESERTA</label><input type="text" id="nomorPeserta" placeholder="Masukkan nomor peserta"></div>
+        <div><label>NAMA PESERTA</label><input type="text" id="namaPeserta" placeholder="Masukkan nama peserta"></div>
     </div>
 
     <h3 style="font-weight: bold; color: #1565c0; margin: 25px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #bbdefb;">ASPEK PENILAIAN</h3>
@@ -85,17 +91,20 @@ input.jumlah { width: 90px; padding: 8px; background-color: #e3f2fd; border: 2px
 
     <div class="catatan-section">
         <label>CATATAN JURI</label>
-        <textarea placeholder="Tuliskan catatan atau masukan untuk peserta..."></textarea>
+        <textarea id="catatan" placeholder="Tuliskan catatan atau masukan untuk peserta..."></textarea>
     </div>
 
     <div class="ttd-section">
         <label>Tanda Tangan Juri</label>
-        <input type="text" placeholder="(Nama Juri)">
+        <input type="text" id="ttd" placeholder="(Nama Juri)">
     </div>
+
+    <button class="download-btn" id="downloadBtn">Download Hasil Penilaian PDF</button>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-// Ambil semua input nilai dan jumlah
+// Hitung otomatis
 const table = document.querySelector('.penilaian');
 const totalInput = document.querySelector('.total');
 const nilaiRows = table.querySelectorAll('tbody tr');
@@ -119,6 +128,19 @@ function updateTotal(){
     });
     totalInput.value = total;
 }
+
+// Download PDF
+document.getElementById('downloadBtn').addEventListener('click', () => {
+    const element = document.getElementById('penilaianContainer');
+    const opt = {
+        margin:       0.5,
+        filename:     `Penilaian_${document.getElementById('namaPeserta').value.replace(/\s+/g,'_') || 'Peserta'}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+});
 </script>
 </body>
 </html>
